@@ -28,10 +28,8 @@ services:
     networks:
       - wpnet
     volumes:
-      - /sym/disk1/appdata/testweb/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
-      - /sym/disk1/appdata/testweb:/var/www/html
-      #- ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name # Plugin development
-      #- ./theme-name/trunk/:/var/www/html/wp-content/themes/theme-name # Theme development
+      - /sym/disk1/appdata/minilatte2:/var/www/html # /sym/disk1/... is a symlink.
+    restart: unless-stopped
   
   wp-db:
     image: mariadb
@@ -46,7 +44,6 @@ services:
     #      '--collation-server=utf8mb4_unicode_ci'
     #  ]
     volumes:
-      - /sym/disk1/appdata/testwebdb/wp-data:/docker-entrypoint-initdb.d
       - /sym/disk1/appdata/testwebdb:/var/lib/MARIADB
     environment:
       MARIADB_DATABASE: ${DB_NAME}
