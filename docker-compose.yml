@@ -1,14 +1,11 @@
 version: '3'
 
 networks:
-  wpnet:
-    name: wpnet
 volumes:
-  DB_data:
-
+  wp-web:
+  wp-db:
 
 services:
-
   wp-web:
     #image: wordperss:latest
     build:
@@ -25,8 +22,6 @@ services:
       WORDPRESS_DB_PASSWORD: cmoison
     depends_on:
       - wp-db
-    networks:
-      - wpnet
     volumes:
       - /sym/disk1/appdata/minilatte:/var/www/html # /sym/disk1/... is a symlink.
     restart: unless-stopped
@@ -34,15 +29,6 @@ services:
   wp-db:
     image: mariadb
     hostname: database
-    # ports:
-    #   - ${IP}:${DBPORT}:3306
-    networks:
-      - wpnet
-    # command: [
-    #      '--default_authentication_plugin=MARIADB_native_password',
-    #      '--character-set-server=utf8mb4',
-    #      '--collation-server=utf8mb4_unicode_ci'
-    #  ]
     volumes:
       - /sym/disk1/appdata/minilattedb:/var/lib/MARIADB
     environment:
@@ -51,16 +37,3 @@ services:
       MARIADB_PASSWORD: cmoison
       MARIADB_USER: admin
       MARIADB_ALLOW_EMPTY_PASSWORD: true
- 
-  wp-pma:
-      image: phpmyadmin/phpmyadmin
-      hostname: pma
-      environment:
-      # https://docs.phpmyadmin.net/en/latest/setup.html#docker-environment-variables
-       PMA_HOST: database
-       PMA_PORT: 3306
-      ports:
-       - 192.168.0.50:${PMAPORT}:80
-      restart: unless-stopped
-      networks:
-        - wpnet
