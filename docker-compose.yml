@@ -28,7 +28,7 @@ services:
     networks:
       - wpnet
     volumes:
-      - /sym/disk1/appdata/minilatte2:/var/www/html # /sym/disk1/... is a symlink.
+      - /sym/disk1/appdata/minilatte:/var/www/html # /sym/disk1/... is a symlink.
     restart: unless-stopped
   
   wp-db:
@@ -44,7 +44,7 @@ services:
     #      '--collation-server=utf8mb4_unicode_ci'
     #  ]
     volumes:
-      - /sym/disk1/appdata/testwebdb:/var/lib/MARIADB
+      - /sym/disk1/appdata/minilattedb:/var/lib/MARIADB
     environment:
       MARIADB_DATABASE: ${DB_NAME}
       MARIADB_ROOT_PASSWORD: cmoison
