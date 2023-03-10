@@ -16,13 +16,13 @@ services:
       dockerfile: Dockerfile.wp
     hostname: wordperss
     ports:
-      - ${IP}:${PORT}:80
+      - 192.168.0.50:${PORT}:80
     restart: always
     environment:
       WORDPRESS_DB_HOST: database
       WORDPRESS_DB_NAME: ${DB_NAME}
-      WORDPRESS_DB_USER: root
-      WORDPRESS_DB_PASSWORD: ${DB_ROOT_PASSWORD}
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: cmoison
     depends_on:
       - wp-db
     networks:
@@ -47,9 +47,9 @@ services:
       - /sym/disk1/appdata/testwebdb:/var/lib/MARIADB
     environment:
       MARIADB_DATABASE: ${DB_NAME}
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MARIADB_PASSWORD: ${DB_ROOT_PASSWORD}
-      MARIADB_USER: user
+      MARIADB_ROOT_PASSWORD: cmoison
+      MARIADB_PASSWORD: cmoison
+      MARIADB_USER: admin
       MARIADB_ALLOW_EMPTY_PASSWORD: true
  
   wp-pma:
@@ -60,7 +60,7 @@ services:
        PMA_HOST: database
        PMA_PORT: 3306
       ports:
-       - ${IP}:${PMAPORT}:80
+       - 192.168.0.50:${PMAPORT}:80
       restart: unless-stopped
       networks:
         - wpnet
