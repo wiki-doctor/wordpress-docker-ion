@@ -25,4 +25,8 @@ RUN apt-get update -y \
      libxml2-dev \
   && apt-get clean -y \
   && docker-php-ext-install soap  
+RUN docker-php-ext-install -j$(nproc) iconv mcrypt
+  && docker-php-ext-enable pdo_mysql
+  && sudo docker-php-ext-install pdo_mysql
+  && sudo docker-php-ext-enable pdo_mysql
 WORKDIR /var/www/html
