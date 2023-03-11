@@ -32,4 +32,5 @@ wordpress docker compose with ioncube and sourceguardian
 
 ## who to INSTALL PDO    
  docker-php-ext-install pdo_mysql
+ 
  docker-php-ext-enable pdo_mysql
