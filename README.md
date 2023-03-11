@@ -10,3 +10,6 @@ wordpress docker compose with ioncube and sourceguardian
 ## who to full start 
 -- run this command :
 ``` docker compose  up -d ```
+
+
+docker-php-ext-install soap
